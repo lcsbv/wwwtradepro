@@ -7,6 +7,7 @@ html, body {
   font-family: 'Montserrat', Arial, sans-serif;
   box-sizing: border-box;
   overflow-x: hidden;
+  background-color: #000; /* fallback */
 }
 
 .bg-video {
@@ -19,14 +20,25 @@ html, body {
   pointer-events: none;
 }
 
+/* ==== FUNDO COM CIRCUITOS SOBRE O VÍDEO ==== */
 .background-overlay {
   position: fixed;
   left: 0; top: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(234,240,246,0.70);
+  background: 
+    rgba(0, 0, 0, 0.4), /* escurece um pouco o vídeo */
+    url('1171867.png') repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
   z-index: 1;
   pointer-events: none;
+  animation: moveCircuits 40s linear infinite;
+}
+
+@keyframes moveCircuits {
+  0% { background-position: 0 0; }
+  100% { background-position: 500px 500px; }
 }
 
 .container {
@@ -40,25 +52,30 @@ html, body {
   height: 100vh;
   margin: 0 auto;
   gap: 30px;
-  text-align: center; /* Centraliza textos no container */
+  text-align: center;
 }
 
 header {
   width: 100%;
   margin-bottom: 18px;
-  text-align: center; /* Centraliza header */
+  text-align: center;
 }
 
 header h1 {
-  color: #233554;
+  color: cyan;
+  text-shadow: 0 0 10px rgba(0,255,255,0.7),
+               0 0 20px rgba(0,255,255,0.5),
+               0 0 30px rgba(0,255,255,0.3);
   white-space: nowrap;
   font-size: clamp(2rem, 3.2vw, 3.2rem);
   font-weight: bold;
   margin-bottom: 8px;
   letter-spacing: 1px;
 }
+
 header p {
-  color: #4c5c6c;
+  color: #a8f6ff;
+  text-shadow: 0 0 5px rgba(0,255,255,0.3);
   font-size: 1.12rem;
 }
 
@@ -66,23 +83,24 @@ main {
   display: flex;
   gap: 32px;
   margin-top: 12px;
-  text-align: center; /* Centraliza textos no main */
+  text-align: center;
 }
 
 /* Box da esquerda */
 .why {
-  background: #188ae2;
+  background: rgba(0, 40, 60, 0.7);
   color: #fff;
   border-radius: 12px;
   padding: 30px 25px;
   min-width: 270px;
-  box-shadow: 0 8px 36px #0e3f8d22;
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; /* Centraliza conteúdo */
+  align-items: center;
   max-width: 330px;
-  text-align: center; /* Centraliza textos */
+  text-align: center;
   transition: transform .2s, box-shadow .2s;
 }
 .why h2 {
@@ -90,86 +108,90 @@ main {
   margin-bottom: 10px;
   font-weight: bold;
   letter-spacing: 0.5px;
+  text-shadow: 0 0 10px cyan;
 }
 .why p {
   font-size: 0.98rem;
   margin-bottom: 18px;
 }
 .why button {
-  background: #fff;
-  color: #337ce5;
+  background: rgba(0, 255, 255, 0.1);
+  color: cyan;
   padding: 8px 20px;
   border-radius: 22px;
-  border: none;
+  border: 1px solid cyan;
   font-weight: bold;
   cursor: pointer;
   font-size: 1rem;
-  box-shadow: 0 2px 8px #0e3f8d22;
+  box-shadow: 0 0 10px cyan;
   transition: background .2s;
 }
 .why button:hover {
-  background: #000000;
+  background: cyan;
+  color: black;
 }
 .why:hover {
   transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 12px 32px #0e3f8d33;
+  box-shadow: 0 0 25px cyan;
 }
 
 /* Grid das features */
 .features {
   display: flex;
   gap: 20px;
-  text-align: center; /* Centraliza textos */
+  text-align: center;
   justify-content: center;
 }
 
 .feature {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 12px;
-  box-shadow: 0 8px 32px #0e3f8d12;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
   padding: 30px 25px;
   min-width: 220px;
   max-width: 260px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza conteúdo */
-  text-align: center; /* Centraliza textos */
+  align-items: center;
+  text-align: center;
   transition: transform .2s, box-shadow .2s;
   min-width: 0;
 }
 .feature:hover {
   transform: translateY(-5px) scale(1.03);
-  box-shadow: 0 12px 32px #0e3f8d33;
+  box-shadow: 0 0 25px cyan;
 }
 .feature i {
-  color: #188ae2;
+  color: cyan;
   margin-bottom: 12px;
+  text-shadow: 0 0 10px cyan;
 }
 .feature h3 {
   font-size: 1.1rem;
-  color: #243450;
+  color: #00f0ff;
   font-weight: bold;
   margin-bottom: 3em;
+  text-shadow: 0 0 10px cyan;
 }
 
 .feature p {
-  color: #5b5f66;
+  color: #a8f6ff;
   font-size: 0.95rem;
   margin-bottom: 0;
 }
 
-/* ————— VÍDEO DENTRO DA BOX ————— */
+/* Vídeo na box */
 .feature.video-box {
   width: 100%;
   max-width: 400px;
-  align-items: center; /* Centraliza conteúdo */
+  align-items: center;
 }
 
-/* Moldura responsiva */
 .video-frame {
   width: 100%;
   border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0 0 20px rgba(0,255,255,0.4);
   overflow: hidden;
   background: #000;
   aspect-ratio: 16 / 9;
@@ -198,7 +220,7 @@ main {
 
 .video-desc {
   font-size: 0.9rem;
-  color: #5b5f66;
+  color: #a8f6ff;
   margin-top: 10px;
   text-align: center;
 }
